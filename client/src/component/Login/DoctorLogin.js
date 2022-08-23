@@ -32,16 +32,19 @@ class DoctorLogin extends Component {
       password: user.password
     }).then(response => {
       if(response.data === "Email not found") return "Email not found";
-      
+      if(response.data === "Password incorrect") return "Password incorrect";
       sessionStorage.setItem('usertoken', response.data)
       return response.data
     }).then(res => {
-      if(res !== "Email not found") {
+      if(res !== "Email not found" && res!== "Password incorrect") {
         sessionStorage.setItem('userData', JSON.stringify(user));
         this.props.history.push('/doctors/login/doctor_home');
-      } 
+      } else {
+        alert(res);
+      }
     }).catch(err => {
       console.log(err)
+      alert(err)
     })
   } 
 

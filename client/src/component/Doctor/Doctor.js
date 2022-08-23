@@ -122,7 +122,7 @@ class Doctor extends Component {
   <div className="list-group-flush" style ={{backgroundColor:"#e0e0e0"}}>
   
     
-  {!isLoading ? patients.map(patient => {
+  {!isLoading ? patients && patients.length && patients.map(patient => {
     return (
       <div key={patient.patient_id} className="list-group-item"  style ={{backgroundColor:"#e0e0e0"}}>
         <p  className="mb-0" style ={{backgroundColor:"#e0e0e0"}}><i className="fab fa-slack-hash fa-2x mr-4 purple p-3 white-text rounded " aria-hidden="true"></i> {patient.first_name} {patient.last_name} </p>

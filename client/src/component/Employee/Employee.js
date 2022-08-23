@@ -85,7 +85,13 @@ class Employee extends Component {
       .then(response => {
         return response.data;
       })
-      .catch(err => console.log(err));
+      .then(res=> {
+        alert(res);
+      })
+      .catch(err => {
+        alert(err)
+        console.log(err)
+      });
   }
 
 

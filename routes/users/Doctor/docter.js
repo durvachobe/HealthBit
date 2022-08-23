@@ -27,8 +27,8 @@ doctor.post('/register', (req, res) => {
         console.log(result1[0]);
 
         if(result1[0] == undefined) {
-            bcrypt.hash(req.body.password, 10, (err, hash) => {
-                doctorData.password = hash;
+            // bcrypt.hash(req.body.password, 10, (err, hash) => {
+                // doctorData.password = hash;
                 
                 let create = `INSERT INTO doctors (first_name, last_name, address, email, salary, specialisation, shift_time, password)
                               VALUES ( "${doctorData.first_name}", 
@@ -41,10 +41,13 @@ doctor.post('/register', (req, res) => {
                                        "${doctorData.password}")`;
 
                 db.query(create, (err2, result2) => {
-                    if(err2) console.log(err2);
-                    res.send("Created Database ooooooooooooohhhhhh");
+                    if(err2) {
+                        console.log(err2);
+                        res.send(err2);
+                    }
+                    res.send("Created Doctor Successfully!");
                 })
-            });
+            // });
         }else {
             res.send("doctor already exist...");
         }
@@ -59,7 +62,7 @@ doctor.post('/login', (req, res) => {
         console.log(result);
 
         if(result[0] != undefined) {
-            if(bcrypt.compareSync(req.body.password, result[0].password)) {
+            if(req.body.password === result[0].password) {
                 let token = jwt.sign(result[0].doctor_id, process.env.SECRET_KEY);
                 res.send(token);
             } else {

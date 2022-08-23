@@ -23,8 +23,8 @@ users.post('/register', (req, res) => {
         console.log(result1[0]);
 
         if(result1[0] == undefined) {
-            bcrypt.hash(req.body.password, 10, (err, hash) => {
-                userData.password = hash;
+            // bcrypt.hash(req.body.password, 10, (err, hash) => {
+                // userData.password = hash;
                 
                 let create = `INSERT INTO users (firstname, lastname, email, password)
                               VALUES ( "${userData.first_name}", 
@@ -33,10 +33,13 @@ users.post('/register', (req, res) => {
                                        "${userData.password}")`;
 
                 db.query(create, (err2, result2) => {
-                    if(err2) console.log(err2);
-                    res.send("Created Database ooooooooooooohhhhhh");
+                    if(err2) {
+                        console.log(err2);
+                        res.send(err2);
+                    }
+                    res.send("Created Employee Succesfully!");
                 })
-            });
+            // });
         }else {
             res.send("user already exist...");
         }
@@ -51,7 +54,7 @@ users.get('/login', (req, res) => {
         console.log(result);
 
         if(result[0] != undefined) {
-            if(bcrypt.compareSync(req.body.password, result[0].password)) {
+            if(req.body.password === result[0].password) {
                 let token = jwt.sign(result[0].user_id, process.env.SECRET_KEY);
                 res.send(token);
             } else {
@@ -68,7 +71,10 @@ users.get('/profile', (req, res) => {
     
     let user = `SELECT * FROM users WHERE user_id = ${user_id}`;
     db.query(user, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
         res.send(result);
     });
 });
