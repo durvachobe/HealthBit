@@ -31,7 +31,7 @@ class Footer extends Component {
       
              
               <h5 className="text-uppercase font-weight-bold">Address:</h5>
-              <p> 47/77 Banerjee Para Kolkata-700031</p>
+              <p> 47/77 A:B Road, Maharashtra-700031</p>
       
             </div>
            

@@ -25,10 +25,10 @@ class HomeQuote extends Component {
                     <Card bg="success" text="white" style={{ width: '18rem' }}>
                     <Card.Header>Best Hospital Award</Card.Header>
                     <Card.Body>
-                      <Card.Title>Awarded to be Best Hospital in Kolkata</Card.Title>
+                      <Card.Title>Awarded to be Best Hospital in Mumbai</Card.Title>
                       <Card.Text>
                         We are overwhelmed by the support our patients provide us and 
-                        you made us the best in Kolkata!
+                        you made us the best in Mumbai!
                       </Card.Text>
                     </Card.Body>
                   </Card>
